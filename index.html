@@ -3,27 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cari Ejen Sah — Minyak Herba Asmak</title>
+<title>Semakan Ejen Sah — Minyak Herba Asmak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/asmak-logo.png">
 <style>
   :root{
-    --ink:#16281F;
-    --serai:#2F5D45;
-    --serai-light:#3E7358;
-    --gold:#C08A2E;
-    --gold-soft:#E4C583;
-    --parchment:#F6F0E2;
-    --parchment-deep:#EDE3CC;
-    --bark:#6B6255;
-    --card:#FFFDF7;
+    --ink:#18261F;
+    --green:#24523A;
+    --green-soft:#376B4D;
+    --gold:#B8892E;
+    --gold-soft:#D7B66C;
+    --cream:#F7F0E2;
+    --cream-card:#FFFBF2;
+    --brown:#746957;
+    --line:#E0D3B8;
+    --asmak-red:#F10D1B;
     --wa:#25D366;
     --wa-dark:#1DA851;
-    --line:#E1D6BC;
-    --radius:18px;
-    --radius-sm:10px;
-    --shadow: 0 1px 2px rgba(22,40,31,0.04), 0 8px 24px -12px rgba(22,40,31,0.18);
+    --radius:8px;
+    --shadow:0 1px 2px rgba(24,38,31,0.05), 0 18px 44px -28px rgba(24,38,31,0.42);
     --serif: "Fraunces", Georgia, serif;
     --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -38,7 +38,7 @@
 
   body{
     margin:0;
-    background:var(--parchment);
+    background:var(--cream);
     color:var(--ink);
     font-family:var(--sans);
     -webkit-font-smoothing:antialiased;
@@ -46,124 +46,296 @@
   }
 
   a{color:inherit;}
-  button{font-family:inherit;}
+  button,input{font-family:inherit;}
+  img{max-width:100%; display:block;}
 
-  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 24px;}
 
   /* ---------- NAV ---------- */
+  .site-header{
+    background:var(--cream-card);
+    border-bottom:1px solid var(--line);
+  }
   .nav{
     display:flex; align-items:center; justify-content:space-between;
-    padding:20px 0;
+    gap:18px;
+    padding:14px 0;
   }
-  .brand{display:flex; align-items:center; gap:10px;}
-  .brand-mark{
-    width:38px; height:38px; border-radius:50%;
-    background:var(--serai);
+  .brand{
+    display:flex; align-items:center; gap:14px;
+    min-width:0; text-decoration:none;
+  }
+  .brand-logo{
+    width:150px; min-height:54px;
+    background:#fff;
+    border:1px solid rgba(224,211,184,0.82);
+    border-radius:var(--radius);
+    padding:8px 10px;
     display:flex; align-items:center; justify-content:center;
-    color:var(--gold-soft);
     flex-shrink:0;
   }
-  .brand-mark svg{width:22px; height:22px;}
+  .brand-logo img{width:128px; height:auto;}
+  .brand-fallback{
+    font-family:var(--serif); font-size:16px; font-weight:700;
+    color:var(--green); text-align:center; line-height:1.15;
+  }
   .brand-text{display:flex; flex-direction:column; line-height:1.15;}
-  .brand-text strong{font-family:var(--serif); font-size:18px; font-weight:600; letter-spacing:0.01em;}
-  .brand-text span{font-size:11.5px; color:var(--bark); letter-spacing:0.06em; text-transform:uppercase;}
+  .brand-text strong{font-family:var(--serif); font-size:19px; font-weight:700; letter-spacing:0;}
+  .brand-text span{font-size:12px; color:var(--brown); font-weight:700;}
   .nav-stat{
-    font-family:var(--mono); font-size:12px; color:var(--serai);
-    background:var(--card); border:1px solid var(--line);
-    padding:7px 12px; border-radius:999px;
+    font-family:var(--mono); font-size:12px; color:var(--green);
+    background:#fff; border:1px solid var(--line);
+    padding:8px 12px; border-radius:var(--radius);
     white-space:nowrap;
   }
   .nav-stat b{color:var(--ink);}
 
   /* ---------- HERO ---------- */
-  .hero{position:relative; padding:36px 0 28px; overflow:hidden;}
-  .hero-seal{
-    position:absolute; top:-40px; right:-60px;
-    width:280px; height:280px; color:var(--gold);
-    opacity:0.09; pointer-events:none;
+  .hero{
+    position:relative;
+    padding:30px 0 26px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(320px,390px);
+    gap:30px;
+    align-items:center;
   }
   .eyebrow{
     display:inline-flex; align-items:center; gap:7px;
-    font-size:12.5px; font-weight:600; color:var(--serai);
-    letter-spacing:0.04em; text-transform:uppercase;
+    font-size:12px; font-weight:800; color:var(--green);
+    background:rgba(184,137,46,0.14);
+    border:1px solid rgba(184,137,46,0.32);
+    border-radius:999px;
+    padding:6px 11px;
     margin-bottom:14px;
   }
   .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--gold);}
   h1{
     font-family:var(--serif);
-    font-weight:600;
-    font-size:clamp(32px, 5.2vw, 54px);
+    font-weight:700;
+    font-size:48px;
     line-height:1.08;
-    letter-spacing:-0.01em;
+    letter-spacing:0;
     margin:0 0 16px;
-    max-width:15ch;
+    max-width:17ch;
   }
-  h1 em{font-style:italic; color:var(--serai);}
   .lede{
-    font-size:16.5px; color:var(--bark); max-width:56ch; margin:0 0 28px;
+    font-size:16.5px; color:var(--brown); max-width:62ch; margin:0 0 22px;
   }
 
   .controls{
-    background:var(--card);
+    background:var(--cream-card);
     border:1px solid var(--line);
+    border-left:4px solid var(--gold);
     border-radius:var(--radius);
-    padding:18px;
+    padding:16px;
     box-shadow:var(--shadow);
   }
   .search-row{display:flex; gap:10px; flex-wrap:wrap;}
   .search-box{
-    flex:1 1 260px;
+    flex:1 1 360px;
     display:flex; align-items:center; gap:10px;
-    background:var(--parchment);
+    background:#fff;
     border:1px solid var(--line);
-    border-radius:var(--radius-sm);
-    padding:12px 14px;
+    border-radius:var(--radius);
+    padding:13px 14px;
+    min-height:50px;
   }
-  .search-box svg{width:18px; height:18px; color:var(--bark); flex-shrink:0;}
+  .search-box:focus-within{
+    border-color:var(--green);
+    box-shadow:0 0 0 3px rgba(36,82,58,0.12);
+  }
+  .search-box svg{width:18px; height:18px; color:var(--gold); flex-shrink:0;}
   .search-box input{
     border:none; background:none; outline:none;
     font-size:15px; width:100%; color:var(--ink);
     font-family:var(--sans);
   }
-  .search-box input::placeholder{color:#9B927F;}
+  .search-box input::placeholder{color:#958A76;}
 
   .geo-btn{
     display:flex; align-items:center; gap:8px;
-    background:var(--serai); color:#fff;
-    border:none; border-radius:var(--radius-sm);
-    padding:12px 16px; font-size:14px; font-weight:600;
+    background:var(--green); color:#fff;
+    border:1px solid var(--green); border-radius:var(--radius);
+    padding:12px 16px; font-size:14px; font-weight:800;
     cursor:pointer; white-space:nowrap;
-    transition:background 0.15s ease, transform 0.1s ease;
+    min-height:50px;
+    transition:background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
   }
-  .geo-btn:hover{background:var(--serai-light);}
+  .geo-btn:hover{background:var(--green-soft); border-color:var(--green-soft);}
   .geo-btn:active{transform:scale(0.98);}
   .geo-btn svg{width:16px; height:16px;}
   .geo-btn:focus-visible, .chip:focus-visible, .search-box input:focus-visible, .card-btn:focus-visible, .reset-btn:focus-visible{
-    outline:2px solid var(--serai); outline-offset:2px;
+    outline:2px solid var(--green); outline-offset:2px;
   }
 
   .geo-msg{
-    font-size:12.5px; color:var(--serai); margin-top:10px;
+    font-size:12.5px; color:var(--green); margin-top:10px;
     display:none; align-items:center; gap:6px;
   }
   .geo-msg.show{display:flex;}
   .geo-msg.error{color:#A0522D;}
 
   .trust-row{
-    display:flex; gap:18px; flex-wrap:wrap;
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0,1fr));
+    gap:8px;
     margin-top:16px; padding-top:16px;
-    border-top:1px dashed var(--line);
+    border-top:1px solid var(--line);
   }
   .trust-item{
     display:flex; align-items:center; gap:7px;
-    font-size:12.5px; color:var(--bark); font-weight:500;
+    min-height:38px;
+    font-size:12.5px; color:var(--ink); font-weight:700;
+    background:rgba(36,82,58,0.06);
+    border:1px solid rgba(36,82,58,0.14);
+    border-radius:var(--radius);
+    padding:8px 10px;
   }
-  .trust-item svg{width:15px; height:15px; color:var(--serai); flex-shrink:0;}
+  .trust-item svg{width:15px; height:15px; color:var(--green); flex-shrink:0;}
+
+  .official-note{
+    margin-top:14px;
+    background:#F9F2DF;
+    border:1px solid rgba(184,137,46,0.34);
+    border-left:4px solid var(--gold);
+    border-radius:var(--radius);
+    padding:12px 14px;
+    color:var(--brown);
+    font-size:13.5px;
+    line-height:1.55;
+  }
+  .official-note strong{color:var(--ink);}
+
+  .product-display{
+    background:var(--cream-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .product-cap{
+    background:var(--green);
+    color:#fff;
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:10px 14px;
+    font-size:12px; font-weight:800;
+  }
+  .product-cap span:last-child{
+    color:#F6E3AF;
+    font-family:var(--mono);
+    font-weight:600;
+  }
+  .product-stage{
+    min-height:236px;
+    display:grid;
+    place-items:center;
+    padding:18px;
+    background:#FFF8EA;
+    border-bottom:1px solid var(--line);
+  }
+  .product-image{
+    max-height:214px;
+    object-fit:contain;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 14px 30px -22px rgba(24,38,31,0.58);
+  }
+  .product-placeholder{
+    display:none;
+    width:100%;
+    grid-template-columns:116px 1fr;
+    align-items:center;
+    gap:18px;
+  }
+  .product-placeholder.is-visible{display:grid;}
+  .product-pack{
+    min-height:182px;
+    border:1px solid rgba(36,82,58,0.24);
+    border-radius:var(--radius);
+    background:#fff;
+    box-shadow:0 18px 28px -24px rgba(24,38,31,0.5);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    padding:12px;
+    position:relative;
+  }
+  .product-pack:before{
+    content:"";
+    position:absolute; left:0; right:0; top:0;
+    height:9px; background:var(--green);
+  }
+  .product-pack img{width:90px;}
+  .product-pack span{
+    font-family:var(--serif);
+    color:var(--gold);
+    font-weight:700;
+    font-size:18px;
+  }
+  .product-copy{display:flex; flex-direction:column; gap:8px;}
+  .product-copy strong{
+    font-family:var(--serif);
+    font-size:24px;
+    line-height:1.15;
+  }
+  .product-copy span{
+    width:max-content;
+    max-width:100%;
+    color:var(--green);
+    background:rgba(36,82,58,0.08);
+    border:1px solid rgba(36,82,58,0.16);
+    border-radius:999px;
+    padding:5px 9px;
+    font-size:12px;
+    font-weight:800;
+  }
+  .verification-strip{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+  }
+  .verification-strip div{
+    background:var(--cream-card);
+    padding:12px 14px;
+  }
+  .verification-strip span{
+    display:block;
+    font-size:11px;
+    color:var(--brown);
+    font-weight:700;
+    margin-bottom:2px;
+  }
+  .verification-strip strong{
+    display:block;
+    color:var(--ink);
+    font-size:13px;
+  }
+  .product-note{
+    padding:12px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    border-bottom:1px solid var(--line);
+    color:var(--brown);
+    font-size:12.5px;
+  }
+  .product-note strong{
+    color:var(--green);
+    font-size:13px;
+  }
 
   /* ---------- CHIPS ---------- */
   .chips-section{
     position:sticky; top:0; z-index:20;
-    background:var(--parchment);
+    background:rgba(247,240,226,0.96);
+    backdrop-filter:blur(8px);
     padding:16px 0 12px;
     border-bottom:1px solid var(--line);
   }
@@ -176,29 +348,31 @@
     flex-shrink:0;
     font-family:var(--sans); font-size:13.5px; font-weight:600;
     color:var(--ink);
-    background:var(--card); border:1px solid var(--line);
+    background:var(--cream-card); border:1px solid var(--line);
     border-radius:999px; padding:8px 14px;
     cursor:pointer; white-space:nowrap;
     transition:all 0.15s ease;
   }
-  .chip .count{color:var(--bark); font-weight:500;}
+  .chip .count{color:var(--brown); font-weight:500;}
   .chip:hover{border-color:var(--gold);}
   .chip.active{
-    background:var(--ink); border-color:var(--ink); color:var(--parchment-deep);
+    background:var(--green); border-color:var(--green); color:#fff;
   }
-  .chip.active .count{color:var(--gold-soft);}
+  .chip.active .count{color:#F6E3AF;}
 
   /* ---------- RESULTS ---------- */
   .results{padding:28px 0 60px;}
-  .state-group{margin-bottom:36px;}
+  .state-group{margin-bottom:34px;}
   .state-head{
     display:flex; align-items:baseline; gap:10px;
-    margin-bottom:16px;
+    margin-bottom:14px;
+    padding-bottom:9px;
+    border-bottom:1px solid var(--line);
   }
   .state-head h2{
-    font-family:var(--serif); font-size:22px; font-weight:600; margin:0;
+    font-family:var(--serif); font-size:22px; font-weight:700; margin:0;
   }
-  .state-head .n{font-size:13px; color:var(--bark); font-family:var(--mono);}
+  .state-head .n{font-size:13px; color:var(--brown); font-family:var(--mono);}
 
   .grid{
     display:grid;
@@ -207,8 +381,9 @@
   }
 
   .card{
-    background:var(--card);
+    background:var(--cream-card);
     border:1px solid var(--line);
+    border-top:4px solid var(--green);
     border-radius:var(--radius);
     padding:18px;
     display:flex; flex-direction:column; gap:12px;
@@ -216,30 +391,45 @@
   }
   .card:hover{transform:translateY(-2px); box-shadow:var(--shadow); border-color:var(--gold-soft);}
 
-  .card-top{display:flex; align-items:flex-start; justify-content:space-between; gap:10px;}
-  .code-badge{
+  .verified-badge{
+    width:max-content;
+    max-width:100%;
     display:flex; align-items:center; gap:6px;
-    font-family:var(--mono); font-size:11.5px; font-weight:500;
-    color:var(--serai); background:rgba(47,93,69,0.08);
-    padding:5px 9px; border-radius:7px;
+    color:var(--green);
+    background:rgba(36,82,58,0.08);
+    border:1px solid rgba(36,82,58,0.16);
+    border-radius:999px;
+    padding:5px 10px;
+    font-size:12px;
+    font-weight:800;
   }
-  .code-badge svg{width:13px; height:13px; color:var(--gold); flex-shrink:0;}
-  .code-badge.muted{color:var(--bark); background:rgba(107,98,85,0.08);}
-  .code-badge.muted svg{color:var(--bark); opacity:0.5;}
 
-  .card-name{font-size:16.5px; font-weight:700; color:var(--ink); line-height:1.3;}
+  .card-name{font-size:17px; font-weight:800; color:var(--ink); line-height:1.3;}
+
+  .code-row{
+    display:flex; flex-wrap:wrap; gap:6px;
+    font-size:12.5px;
+    color:var(--brown);
+  }
+  .code-row strong{
+    font-family:var(--mono);
+    color:var(--green);
+    font-weight:700;
+  }
+  .code-row.muted strong{color:var(--brown);}
 
   .areas{display:flex; flex-wrap:wrap; gap:6px;}
   .area-tag{
-    font-size:12px; color:var(--bark);
-    background:var(--parchment); border:1px solid var(--line);
+    font-size:12px; color:var(--brown);
+    background:#fff; border:1px solid var(--line);
     padding:3px 9px; border-radius:999px;
   }
 
   .card-actions{display:flex; gap:8px; margin-top:auto; padding-top:4px;}
   .card-btn{
     flex:1; display:flex; align-items:center; justify-content:center; gap:6px;
-    padding:10px 10px; border-radius:var(--radius-sm);
+    min-height:42px;
+    padding:10px 10px; border-radius:var(--radius);
     font-size:13px; font-weight:700; text-decoration:none;
     border:1px solid transparent; cursor:pointer;
     transition:filter 0.15s ease, transform 0.1s ease;
@@ -249,105 +439,177 @@
   .btn-wa{background:var(--wa); color:#fff;}
   .btn-wa:hover{filter:brightness(0.95);}
   .btn-call{background:transparent; border-color:var(--line); color:var(--ink);}
-  .btn-call:hover{border-color:var(--serai); color:var(--serai);}
+  .btn-call:hover{border-color:var(--green); color:var(--green);}
   .no-phone{
-    flex:1; text-align:center; font-size:12px; color:var(--bark);
+    flex:1; text-align:center; font-size:12px; color:var(--brown);
     padding:10px; font-style:italic;
   }
 
   .empty{
-    text-align:center; padding:70px 20px; color:var(--bark);
+    text-align:center; padding:70px 20px; color:var(--brown);
   }
   .empty svg{width:44px; height:44px; color:var(--gold-soft); margin-bottom:14px;}
   .empty p{margin:0 0 16px; font-size:15px;}
   .reset-btn{
-    background:var(--ink); color:var(--parchment);
+    background:var(--green); color:#fff;
     border:none; border-radius:999px; padding:10px 20px;
     font-size:13.5px; font-weight:600; cursor:pointer;
   }
 
   /* ---------- FOOTER ---------- */
   footer{
-    background:var(--ink); color:var(--parchment-deep);
+    background:var(--ink); color:#F7F0E2;
     padding:36px 0 28px;
   }
   footer .wrap{display:flex; flex-direction:column; gap:14px;}
-  .footer-brand{font-family:var(--serif); font-size:17px; font-weight:600; color:#fff;}
+  .footer-brand{font-family:var(--serif); font-size:18px; font-weight:700; color:#fff;}
   footer p{font-size:13px; color:#B9AF9B; max-width:60ch; margin:0; line-height:1.6;}
 
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .product-display{max-width:520px;}
+    .trust-row{grid-template-columns:repeat(2, minmax(0,1fr));}
+    h1{font-size:42px;}
+  }
+
   @media (max-width:640px){
-    .nav{padding:16px 0;}
+    .wrap{padding:0 16px;}
+    .nav{align-items:flex-start; flex-direction:column; gap:10px; padding:16px 0;}
+    .brand{gap:10px;}
+    .brand-logo{width:116px; min-height:46px; padding:7px;}
+    .brand-logo img{width:100px;}
+    .brand-text strong{font-size:16px;}
+    .brand-text span{font-size:11px;}
     .nav-stat{font-size:11px; padding:6px 10px;}
     .hero{padding:24px 0 20px;}
+    h1{font-size:34px; max-width:100%;}
     .lede{font-size:15px;}
     .controls{padding:14px;}
     .search-row{flex-direction:column;}
-    .geo-btn{justify-content:center;}
-    .trust-row{gap:12px 16px;}
+    .search-box{flex-basis:auto; width:100%;}
+    .geo-btn{justify-content:center; white-space:normal; text-align:center;}
+    .trust-row{grid-template-columns:1fr; gap:8px;}
+    .product-stage{min-height:170px; padding:14px;}
+    .product-placeholder{grid-template-columns:86px 1fr; gap:13px;}
+    .product-pack{min-height:130px;}
+    .product-pack img{width:70px;}
+    .product-copy strong{font-size:19px;}
+    .product-note{align-items:flex-start; flex-direction:column; gap:4px;}
+    .verification-strip{grid-template-columns:1fr;}
+    .card-actions{flex-direction:column;}
     .grid{grid-template-columns:1fr;}
   }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <div class="nav">
-    <div class="brand">
-      <div class="brand-mark">
-        <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="4"/><path d="M34 51 L45 62 L68 38" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="brand-text">
-        <strong>Minyak Herba Asmak</strong>
-        <span>Rangkaian Ejen Sah</span>
-      </div>
-    </div>
-    <div class="nav-stat" id="navStat"><b>—</b> ejen · <b>—</b> negeri</div>
-  </div>
-</div>
-
-<div class="hero">
-  <svg class="hero-seal" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2.5"/><circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/><path d="M34 51 L45 62 L68 38" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<header class="site-header">
   <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span> Semak sebelum beli</div>
-    <h1>Pastikan anda beli daripada ejen yang <em>sah</em>.</h1>
-    <p class="lede">Produk tiruan berleluasa di pasaran. Cari dan hubungi terus ejen berdaftar Minyak Herba Asmak berhampiran anda — lengkap dengan kod lesen sah.</p>
-
-    <div class="controls">
-      <div class="search-row">
-        <div class="search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-          <input type="text" id="searchInput" placeholder="Cari nama ejen, kawasan atau kod lesen…" autocomplete="off">
+    <div class="nav">
+      <a class="brand" href="#results" aria-label="Minyak Herba Asmak">
+        <div class="brand-logo">
+          <img src="assets/asmak-logo.png" alt="Minyak Herba Asmak" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+          <span class="brand-fallback" hidden>Minyak Herba Asmak</span>
         </div>
-        <button class="geo-btn" id="geoBtn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5.5 7 13 7 13s7-7.5 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          Cari ejen berhampiran saya
-        </button>
-      </div>
-      <div class="geo-msg" id="geoMsg"></div>
-
-      <div class="trust-row">
-        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Kod lesen disahkan</div>
-        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Hubungi terus, tiada orang tengah</div>
-        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Dikemaskini secara berkala</div>
-      </div>
+        <div class="brand-text">
+          <strong>Minyak Herba Asmak</strong>
+          <span>Laman Rasmi Semakan Ejen Sah</span>
+        </div>
+      </a>
+      <div class="nav-stat" id="navStat"><b>—</b> ejen · <b>—</b> negeri</div>
     </div>
   </div>
-</div>
+</header>
 
-<div class="chips-section">
-  <div class="wrap">
-    <div class="chips-scroll" id="chipsScroll"></div>
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Semak sebelum beli</div>
+          <h1>Semak Ejen Sah Minyak Herba Asmak Di Kawasan Anda</h1>
+          <p class="lede">Elakkan produk tiruan. Cari ejen berdaftar Asmak mengikut negeri, kawasan atau kod lesen — dan hubungi terus melalui WhatsApp.</p>
+
+          <div class="controls">
+            <div class="search-row">
+              <div class="search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input type="text" id="searchInput" placeholder="Cari nama ejen, kawasan atau kod lesen…" autocomplete="off">
+              </div>
+              <button class="geo-btn" id="geoBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5.5 7 13 7 13s7-7.5 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                Cari Ejen Berhampiran Saya
+              </button>
+            </div>
+            <div class="geo-msg" id="geoMsg"></div>
+
+            <div class="trust-row">
+              <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Ejen Sah Berdaftar</div>
+              <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Semakan Kod Ejen</div>
+              <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> WhatsApp Terus Ejen</div>
+              <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Senarai Dikemaskini</div>
+            </div>
+
+            <div class="official-note">
+              <strong>Notis Rasmi:</strong> Hanya pembelian melalui ejen sah berdaftar dapat membantu memastikan anda menerima produk Minyak Herba Asmak yang asli. Sila semak nama, kawasan dan kod ejen sebelum membuat pembelian.
+            </div>
+          </div>
+        </div>
+
+        <aside class="product-display" aria-label="Semakan produk Minyak Herba Asmak asli">
+          <div class="product-cap">
+            <span>Minyak Herba Asmak Asli</span>
+            <span>Since 2015</span>
+          </div>
+          <div class="product-stage">
+            <img class="product-image" src="assets/asmak-product.png" alt="Minyak Herba Asmak" onerror="this.style.display='none';this.nextElementSibling.classList.add('is-visible');">
+            <div class="product-placeholder">
+              <div class="product-pack">
+                <img src="assets/asmak-logo.png" alt="">
+                <span>ASLI</span>
+              </div>
+              <div class="product-copy">
+                <strong>Semak sebelum beli</strong>
+                <span>Ejen Sah Berdaftar</span>
+                <span>Kod ejen disemak</span>
+              </div>
+            </div>
+          </div>
+          <div class="product-note">
+            <strong>Semak sebelum beli</strong>
+            <span>Pastikan nama, kawasan dan kod ejen sepadan.</span>
+          </div>
+          <div class="verification-strip">
+            <div>
+              <span>Status semakan</span>
+              <strong>Ejen Sah Berdaftar</strong>
+            </div>
+            <div>
+              <span>Saluran hubungi</span>
+              <strong>WhatsApp terus ejen</strong>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <div class="chips-section">
+    <div class="wrap">
+      <div class="chips-scroll" id="chipsScroll"></div>
+    </div>
   </div>
-</div>
 
-<div class="wrap">
-  <div class="results" id="results"></div>
-</div>
+  <div class="wrap">
+    <div class="results" id="results"></div>
+  </div>
+</main>
 
 <footer>
   <div class="wrap">
     <div class="footer-brand">Minyak Herba Asmak</div>
-    <p>Senarai ejen sah ini dikemaskini secara berkala oleh Minyak Herba Asmak. Sekiranya anda menemui maklumat yang tidak tepat, atau tiada ejen berdekatan kawasan anda, sila maklumkan kepada pihak kami untuk kemaskini.</p>
+    <p>Laman rasmi untuk semakan ejen sah Minyak Herba Asmak Malaysia.</p>
+    <p>Untuk kemaskini maklumat ejen atau pertanyaan rasmi, sila hubungi pihak HQ Asmak.</p>
   </div>
 </footer>
 
@@ -380,6 +642,7 @@
   const SEAL = '<svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="5"/><path d="M34 51 L45 62 L68 38" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const ICON_WA = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.5 7.7 9.3 7.2c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.3c1.4.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.2-.4-4.5-1.3l-.3-.2-3 .8.8-2.9-.2-.3C4 15 3.5 13.5 3.5 12c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5-3.8 8.5-8.5 8.5z"/></svg>';
   const ICON_CALL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.4 2.1L8.1 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.4c.9.3 1.8.5 2.7.6a2 2 0 011.9 2.2z"/></svg>';
+  const WA_MESSAGE = encodeURIComponent('Salam, saya nak dapatkan produk Minyak Herba Asmak');
 
   function digitsOnly(p){ return (p||'').replace(/\D/g,''); }
   function toIntl(p){
@@ -420,28 +683,29 @@
 
   function cardHTML(agent, state){
     const codeBlock = agent.code
-      ? '<div class="code-badge">'+SEAL+'<span>'+escapeHTML(agent.code)+'</span></div>'
-      : '<div class="code-badge muted">'+SEAL+'<span>Kod belum direkod</span></div>';
+      ? '<div class="code-row"><span>Kod Ejen:</span><strong>'+escapeHTML(agent.code)+'</strong></div>'
+      : '<div class="code-row muted"><span>Kod Ejen:</span><strong>Belum direkod</strong></div>';
 
     const areasHTML = agent.areas.map(a=>'<span class="area-tag">'+escapeHTML(a)+'</span>').join('');
 
     const intl = toIntl(agent.phone);
     let actions;
     if(intl){
-      const waHref = 'https://wa.me/'+intl;
+      const waHref = 'https://wa.me/'+intl+'?text='+WA_MESSAGE;
       const telHref = 'tel:+'+intl;
-      actions = '<a class="card-btn btn-wa" href="'+waHref+'" target="_blank" rel="noopener">'+ICON_WA+' WhatsApp</a>'+
+      actions = '<a class="card-btn btn-wa" href="'+waHref+'" target="_blank" rel="noopener">'+ICON_WA+' WhatsApp Ejen</a>'+
                 '<a class="card-btn btn-call" href="'+telHref+'">'+ICON_CALL+' Telefon</a>';
     } else {
       actions = '<div class="no-phone">Nombor telefon tiada — semak ejen lain berdekatan</div>';
     }
 
-    return '<div class="card">'+
-      '<div class="card-top">'+codeBlock+'</div>'+
+    return '<article class="card">'+
+      '<div class="verified-badge">&#10003; Ejen Sah</div>'+
       '<div class="card-name">'+escapeHTML(agent.name)+'</div>'+
+      codeBlock+
       '<div class="areas">'+areasHTML+'</div>'+
       '<div class="card-actions">'+actions+'</div>'+
-    '</div>';
+    '</article>';
   }
 
   function renderResults(){
