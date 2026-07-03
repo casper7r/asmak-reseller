@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cari Ejen Sah — Minyak Herba Asmak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16281F;
+    --serai:#2F5D45;
+    --serai-light:#3E7358;
+    --gold:#C08A2E;
+    --gold-soft:#E4C583;
+    --parchment:#F6F0E2;
+    --parchment-deep:#EDE3CC;
+    --bark:#6B6255;
+    --card:#FFFDF7;
+    --wa:#25D366;
+    --wa-dark:#1DA851;
+    --line:#E1D6BC;
+    --radius:18px;
+    --radius-sm:10px;
+    --shadow: 0 1px 2px rgba(22,40,31,0.04), 0 8px 24px -12px rgba(22,40,31,0.18);
+    --serif: "Fraunces", Georgia, serif;
+    --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+
+  a{color:inherit;}
+  button{font-family:inherit;}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 0;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand-mark{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--serai);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold-soft);
+    flex-shrink:0;
+  }
+  .brand-mark svg{width:22px; height:22px;}
+  .brand-text{display:flex; flex-direction:column; line-height:1.15;}
+  .brand-text strong{font-family:var(--serif); font-size:18px; font-weight:600; letter-spacing:0.01em;}
+  .brand-text span{font-size:11.5px; color:var(--bark); letter-spacing:0.06em; text-transform:uppercase;}
+  .nav-stat{
+    font-family:var(--mono); font-size:12px; color:var(--serai);
+    background:var(--card); border:1px solid var(--line);
+    padding:7px 12px; border-radius:999px;
+    white-space:nowrap;
+  }
+  .nav-stat b{color:var(--ink);}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative; padding:36px 0 28px; overflow:hidden;}
+  .hero-seal{
+    position:absolute; top:-40px; right:-60px;
+    width:280px; height:280px; color:var(--gold);
+    opacity:0.09; pointer-events:none;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:12.5px; font-weight:600; color:var(--serai);
+    letter-spacing:0.04em; text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--gold);}
+  h1{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(32px, 5.2vw, 54px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin:0 0 16px;
+    max-width:15ch;
+  }
+  h1 em{font-style:italic; color:var(--serai);}
+  .lede{
+    font-size:16.5px; color:var(--bark); max-width:56ch; margin:0 0 28px;
+  }
+
+  .controls{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px;
+    box-shadow:var(--shadow);
+  }
+  .search-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .search-box{
+    flex:1 1 260px;
+    display:flex; align-items:center; gap:10px;
+    background:var(--parchment);
+    border:1px solid var(--line);
+    border-radius:var(--radius-sm);
+    padding:12px 14px;
+  }
+  .search-box svg{width:18px; height:18px; color:var(--bark); flex-shrink:0;}
+  .search-box input{
+    border:none; background:none; outline:none;
+    font-size:15px; width:100%; color:var(--ink);
+    font-family:var(--sans);
+  }
+  .search-box input::placeholder{color:#9B927F;}
+
+  .geo-btn{
+    display:flex; align-items:center; gap:8px;
+    background:var(--serai); color:#fff;
+    border:none; border-radius:var(--radius-sm);
+    padding:12px 16px; font-size:14px; font-weight:600;
+    cursor:pointer; white-space:nowrap;
+    transition:background 0.15s ease, transform 0.1s ease;
+  }
+  .geo-btn:hover{background:var(--serai-light);}
+  .geo-btn:active{transform:scale(0.98);}
+  .geo-btn svg{width:16px; height:16px;}
+  .geo-btn:focus-visible, .chip:focus-visible, .search-box input:focus-visible, .card-btn:focus-visible, .reset-btn:focus-visible{
+    outline:2px solid var(--serai); outline-offset:2px;
+  }
+
+  .geo-msg{
+    font-size:12.5px; color:var(--serai); margin-top:10px;
+    display:none; align-items:center; gap:6px;
+  }
+  .geo-msg.show{display:flex;}
+  .geo-msg.error{color:#A0522D;}
+
+  .trust-row{
+    display:flex; gap:18px; flex-wrap:wrap;
+    margin-top:16px; padding-top:16px;
+    border-top:1px dashed var(--line);
+  }
+  .trust-item{
+    display:flex; align-items:center; gap:7px;
+    font-size:12.5px; color:var(--bark); font-weight:500;
+  }
+  .trust-item svg{width:15px; height:15px; color:var(--serai); flex-shrink:0;}
+
+  /* ---------- CHIPS ---------- */
+  .chips-section{
+    position:sticky; top:0; z-index:20;
+    background:var(--parchment);
+    padding:16px 0 12px;
+    border-bottom:1px solid var(--line);
+  }
+  .chips-scroll{
+    display:flex; gap:8px; overflow-x:auto;
+    scrollbar-width:none; padding-bottom:2px;
+  }
+  .chips-scroll::-webkit-scrollbar{display:none;}
+  .chip{
+    flex-shrink:0;
+    font-family:var(--sans); font-size:13.5px; font-weight:600;
+    color:var(--ink);
+    background:var(--card); border:1px solid var(--line);
+    border-radius:999px; padding:8px 14px;
+    cursor:pointer; white-space:nowrap;
+    transition:all 0.15s ease;
+  }
+  .chip .count{color:var(--bark); font-weight:500;}
+  .chip:hover{border-color:var(--gold);}
+  .chip.active{
+    background:var(--ink); border-color:var(--ink); color:var(--parchment-deep);
+  }
+  .chip.active .count{color:var(--gold-soft);}
+
+  /* ---------- RESULTS ---------- */
+  .results{padding:28px 0 60px;}
+  .state-group{margin-bottom:36px;}
+  .state-head{
+    display:flex; align-items:baseline; gap:10px;
+    margin-bottom:16px;
+  }
+  .state-head h2{
+    font-family:var(--serif); font-size:22px; font-weight:600; margin:0;
+  }
+  .state-head .n{font-size:13px; color:var(--bark); font-family:var(--mono);}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+    gap:14px;
+  }
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px;
+    display:flex; flex-direction:column; gap:12px;
+    transition:transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .card:hover{transform:translateY(-2px); box-shadow:var(--shadow); border-color:var(--gold-soft);}
+
+  .card-top{display:flex; align-items:flex-start; justify-content:space-between; gap:10px;}
+  .code-badge{
+    display:flex; align-items:center; gap:6px;
+    font-family:var(--mono); font-size:11.5px; font-weight:500;
+    color:var(--serai); background:rgba(47,93,69,0.08);
+    padding:5px 9px; border-radius:7px;
+  }
+  .code-badge svg{width:13px; height:13px; color:var(--gold); flex-shrink:0;}
+  .code-badge.muted{color:var(--bark); background:rgba(107,98,85,0.08);}
+  .code-badge.muted svg{color:var(--bark); opacity:0.5;}
+
+  .card-name{font-size:16.5px; font-weight:700; color:var(--ink); line-height:1.3;}
+
+  .areas{display:flex; flex-wrap:wrap; gap:6px;}
+  .area-tag{
+    font-size:12px; color:var(--bark);
+    background:var(--parchment); border:1px solid var(--line);
+    padding:3px 9px; border-radius:999px;
+  }
+
+  .card-actions{display:flex; gap:8px; margin-top:auto; padding-top:4px;}
+  .card-btn{
+    flex:1; display:flex; align-items:center; justify-content:center; gap:6px;
+    padding:10px 10px; border-radius:var(--radius-sm);
+    font-size:13px; font-weight:700; text-decoration:none;
+    border:1px solid transparent; cursor:pointer;
+    transition:filter 0.15s ease, transform 0.1s ease;
+  }
+  .card-btn:active{transform:scale(0.97);}
+  .card-btn svg{width:15px; height:15px;}
+  .btn-wa{background:var(--wa); color:#fff;}
+  .btn-wa:hover{filter:brightness(0.95);}
+  .btn-call{background:transparent; border-color:var(--line); color:var(--ink);}
+  .btn-call:hover{border-color:var(--serai); color:var(--serai);}
+  .no-phone{
+    flex:1; text-align:center; font-size:12px; color:var(--bark);
+    padding:10px; font-style:italic;
+  }
+
+  .empty{
+    text-align:center; padding:70px 20px; color:var(--bark);
+  }
+  .empty svg{width:44px; height:44px; color:var(--gold-soft); margin-bottom:14px;}
+  .empty p{margin:0 0 16px; font-size:15px;}
+  .reset-btn{
+    background:var(--ink); color:var(--parchment);
+    border:none; border-radius:999px; padding:10px 20px;
+    font-size:13.5px; font-weight:600; cursor:pointer;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink); color:var(--parchment-deep);
+    padding:36px 0 28px;
+  }
+  footer .wrap{display:flex; flex-direction:column; gap:14px;}
+  .footer-brand{font-family:var(--serif); font-size:17px; font-weight:600; color:#fff;}
+  footer p{font-size:13px; color:#B9AF9B; max-width:60ch; margin:0; line-height:1.6;}
+
+  @media (max-width:640px){
+    .nav{padding:16px 0;}
+    .nav-stat{font-size:11px; padding:6px 10px;}
+    .hero{padding:24px 0 20px;}
+    .lede{font-size:15px;}
+    .controls{padding:14px;}
+    .search-row{flex-direction:column;}
+    .geo-btn{justify-content:center;}
+    .trust-row{gap:12px 16px;}
+    .grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="4"/><path d="M34 51 L45 62 L68 38" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="brand-text">
+        <strong>Minyak Herba Asmak</strong>
+        <span>Rangkaian Ejen Sah</span>
+      </div>
+    </div>
+    <div class="nav-stat" id="navStat"><b>—</b> ejen · <b>—</b> negeri</div>
+  </div>
+</div>
+
+<div class="hero">
+  <svg class="hero-seal" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2.5"/><circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/><path d="M34 51 L45 62 L68 38" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> Semak sebelum beli</div>
+    <h1>Pastikan anda beli daripada ejen yang <em>sah</em>.</h1>
+    <p class="lede">Produk tiruan berleluasa di pasaran. Cari dan hubungi terus ejen berdaftar Minyak Herba Asmak berhampiran anda — lengkap dengan kod lesen sah.</p>
+
+    <div class="controls">
+      <div class="search-row">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="searchInput" placeholder="Cari nama ejen, kawasan atau kod lesen…" autocomplete="off">
+        </div>
+        <button class="geo-btn" id="geoBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5.5 7 13 7 13s7-7.5 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Cari ejen berhampiran saya
+        </button>
+      </div>
+      <div class="geo-msg" id="geoMsg"></div>
+
+      <div class="trust-row">
+        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Kod lesen disahkan</div>
+        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Hubungi terus, tiada orang tengah</div>
+        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Dikemaskini secara berkala</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chips-section">
+  <div class="wrap">
+    <div class="chips-scroll" id="chipsScroll"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="results" id="results"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">Minyak Herba Asmak</div>
+    <p>Senarai ejen sah ini dikemaskini secara berkala oleh Minyak Herba Asmak. Sekiranya anda menemui maklumat yang tidak tepat, atau tiada ejen berdekatan kawasan anda, sila maklumkan kepada pihak kami untuk kemaskini.</p>
+  </div>
+</footer>
+
+<script type="application/json" id="reseller-data">
+{"Kuala Lumpur":[{"name":"Farid","code":"SN08601","phone":"0173647442","areas":["Jln Ipoh","Kuala Lumpur"]},{"name":"Wan Nur Adilah","code":"MH057136","phone":"0123367154","areas":["Setiawangsa","Keramat","Wangsamaju","Jelatek"]},{"name":"Rasidah","code":"MH086109","phone":"01128099172","areas":["Keramat","Setiawangsa","Jelatek","Dato Keramat","Wangsa Maju","Melawati","UK Perdana"]},{"name":"Ainul Izza","code":"MH159127","phone":"0137420301","areas":["Kepong","KL","Segambut","Damansara"]}],"Selangor":[{"name":"Farid","code":"SN08601","phone":"0107796967","areas":["Batu Caves","Gombak"]},{"name":"Nurhidayah Omar","code":null,"phone":"0139481580","areas":["Sungai Buloh"]},{"name":"Siti Robeah","code":"SD05501","phone":"0197901210","areas":["Sepang","BBST","KLIA"]},{"name":"Sarimah","code":"SA08698","phone":"0122571859","areas":["Setia Alam","Meru","Bukit Raja","Aman Perdana"]},{"name":"Siti Ajur","code":"SA08660","phone":"0122179239","areas":["Shah Alam"]},{"name":"Zuraidah","code":"SD19601","phone":"0193392160","areas":["Gombak","Batu Caves"]},{"name":"Nur Aishah","code":"SA08680","phone":"0189566552","areas":["Saujana Utama","Sungai Buloh","Puncak Alam"]},{"name":"Soleha Jaafar","code":null,"phone":"01169211025","areas":["Ampang","Keramat","Setiawangsa"]},{"name":"Siti Ruzana Binti Darus","code":"MH05504","phone":"0139160114","areas":["Olak Lempit","Bukit Changgang","Labohan Dagang","Banting","Jenjarom","Telok Panglima Garang"]},{"name":"Nor Hasmiza","code":"MH08637","phone":"0129314622","areas":["Puchong Utama","sekitar Puchong"]},{"name":"Fazlin Ramlan","code":"SA13310","phone":"0139837339","areas":["BBST Sepang"]},{"name":"Wan Nurfaeqa","code":"MH159173","phone":"0137483032","areas":["Bangi","Kajang"]},{"name":"Noor Fauziah","code":null,"phone":"0182665261","areas":["Seri Kembangan"]},{"name":"Nur Hasmah","code":"MH19621","phone":"0122564383","areas":["Balakong","Seri Kembangan"]},{"name":"Rohani Awang","code":"MH15934","phone":"0133072972","areas":["Bangi","sekitar Kajang"]},{"name":"M. Aidrus (Joe)","code":"MH086107","phone":"0172244818","areas":["Klang","Shah Alam","PJ"]},{"name":"N. Shakilla","code":"MH086210","phone":"0102867269","areas":["Puncak Alam","Saujana Utama","Sg. Besar & sekitar"]},{"name":"Mazlin","code":"MH057214","phone":"0129122271","areas":["Sekitar Klang","Pendamaran","Port Klang"]}],"Putrajaya":[{"name":"Siti Khadijah","code":"SD13301","phone":"0197582312","areas":["Putrajaya"]},{"name":"Aspah Masdan","code":"SA13323","phone":"0172065147","areas":["Putrajaya"]}],"Terengganu":[{"name":"Marina Ahmad","code":"SD09901","phone":"0176253646","areas":["Kuala Terengganu"]},{"name":"Seri Delima Abdullah","code":"MH15949","phone":"0199728571","areas":["Kuala Berang"]},{"name":"Rahimah Muda","code":"SA099141","phone":"0199622005","areas":["Kuala Terengganu"]},{"name":"Rozilawati Alias","code":"SA099142","phone":"0105509198","areas":["Bukit Payong","Marang, Terengganu"]},{"name":"Tg Fauziana Tg Ngah","code":"MH099148","phone":"0139573475","areas":["Kuala Terengganu"]}],"Pahang":[{"name":"Suhaila Jamaludin","code":"SA04901","phone":"0167250985","areas":["Kuantan"]},{"name":"Zubaidah Ahmed Jusof","code":"SA10101","phone":"0182157823","areas":["Kuantan"]},{"name":"Fasehah Ma'arop","code":"MH04903","phone":"0126038487","areas":["Sg. Soi","Kuantan","Pekan"]}],"Kelantan":[{"name":"Anis Umairah","code":"SA09201","phone":"0196004297","areas":["Pasir Mas"]},{"name":"Zunani","code":"SA04803","phone":"01115436571","areas":["Pasir Mas","Rantau Panjang"]},{"name":"Normala","code":"SA0870","phone":"01140209388","areas":["Kota Bharu","Kok Lanas","Ketereh"]},{"name":"Siti Zainab","code":"MH08711","phone":"01126915979","areas":["Gua Musang"]},{"name":"Nor Azmaliza Zakaria","code":"MH06982","phone":"0129625418","areas":["Wakaf Bharu","Tumpat","Kota Bharu dan sekitarnya"]},{"name":"Nurdiana bt Zakaria","code":"MH04818","phone":null,"areas":["Kota Bharu","Bachok","Tumpat"]}],"Johor":[{"name":"Dayah Rosidi","code":"SP09801","phone":"60111469904","phone_note":"WhatsApp","areas":["Senai","Kulai","Pulai","Skudai"]},{"name":"Noorazura Ngaliman","code":"SD09812","phone":"0127655423","areas":["Pasir Gudang"]},{"name":"Noraini Rahmat","code":"SA098109","phone":"0183274954","areas":["Kg Melayu Majidee","Larkin","Dato Onn","Taman Suria & sekitar JB"]},{"name":"Sapinaz Sharif","code":null,"phone":"0195767814","areas":["Tampoi","Kempas","Perling","Skudai","Senai","BBU","Bandar Johor & sekitar"]},{"name":"Aishah","code":null,"phone":"0177210130","areas":["Mersing","Kluang"]},{"name":"Norizah","code":"MH098149","phone":"0129572096","areas":["Parit Raja"]},{"name":"Siti Hasnah","code":"MH159205","phone":null,"areas":["Seluruh kawasan Segamat"]}],"Melaka":[{"name":"Fazlina","code":"SN15901","phone":"0132675712","areas":["Masjid Tanah"]},{"name":"Siti Hadijah","code":"MH159118","phone":"0123739086","areas":["Bukit Rambai","Melaka Tengah"]},{"name":"Siti Norsila","code":"MH159042","phone":"0123778215","areas":["Sg Udang","Melaka Tengah"]},{"name":"Cheta Asmak","code":"SA15906","phone":"0176730318","areas":["Sek Keb Demang Taha","SMK Sultan Alauddin","Masjid Tanah","Ria","Masjid Tanah Bandar Baru","Paya Rumput Masjid Tanah"]},{"name":"Siti Aishah","code":"MH15982","phone":"0126424932","areas":["Masjid Tanah"]},{"name":"Noor Hazzarita","code":"MH159167","phone":"0177881125","areas":["Bukit Katil","Melaka Tengah","Jasin","Merlimau"]}],"Negeri Sembilan":[{"name":"Siti Radziah","code":"SA159100","phone":"0193907954","areas":["Mantin","Pajam","Seremban","Senawang & sekitar"]},{"name":"Fatimah Binti Ramli","code":"MH0341018","phone":"0196840731","areas":["Gemas","Kem Syed Sirajuddin Gemas & sekitar"]},{"name":"Masmawati Binti Ahmad","code":"MH15917","phone":"0126110276","areas":["Port Dickson"]},{"name":"Haslidah Jaffar","code":"MH159191","phone":"0197547334","areas":["Sekitar Senawang","Ampangan","Sikamat","Paroi","Taman Tasik Jaya","Seremban"]},{"name":"Farah Syazwani","code":"MH159279","phone":"0196040084","areas":["Seremban 2","Sendayan","Labu"]}],"Kedah":[{"name":"Noraida Mohamad","code":"SP06901","phone":"0124712680","areas":["Bandar Baharu","Serdang"]},{"name":"Shafini Ariffin","code":"SA06936","phone":"0195905235","areas":["Kulim"]},{"name":"Noraini bt Mohamad","code":"MH06903","phone":"0134296661","areas":["Kulim"]},{"name":"Syafawati Abd Rahman","code":"MH06931","phone":"0174654550","areas":["Yan","Guar Chempedak","Gurun","Jitra"]},{"name":"Madihah Husain","code":"MH05765","phone":"0195767123","areas":["Kuala Nerang","Naka"]},{"name":"Mastura Muhd","code":"MH06922","phone":"0174605509","areas":["Sg Petani"]},{"name":"Nor Azura","code":"MH06930","phone":"0175436239","areas":["Sg Petani"]},{"name":"Rohaida","code":"MH06955","phone":"0135254103","areas":["Sri Astana Sg Petani"]},{"name":"Noor Hasliza Hassan","code":"MH06906","phone":"0123552059","areas":["Padang Serai","Tasek Gelugor","Kg Selamat","Pokok Sena"]}],"Pulau Pinang":[{"name":"Noraida Mohamad","code":"SP06901","phone":"0124712680","areas":["Jawi","Nibong Tebal"]},{"name":"Shafini Ariffin","code":"SA06936","phone":"0195905235","areas":["Seberang Jaya","Kepala Batas"]},{"name":"Nor Azlina bt Zakaria","code":"SA06937","phone":"0174563791","areas":["Simpang Ampat"]},{"name":"Mastura Muhd","code":"MH06922","phone":"0174605509","areas":["Ayer Itam"]},{"name":"Shahidah Che Mat Hadzer","code":"MH06966","phone":"0195650799","areas":["Bayan Lepas","Sg Ara"]}],"Perak":[{"name":"Rabiahtun Basariah","code":"SP05701","phone":"0135819100","areas":["Teluk Intan"]},{"name":"Rizmanadia","code":"SA05793","phone":"0185703493","areas":["Ipoh","Batu Gajah"]},{"name":"Noraida Mohamad","code":"SP06901","phone":"0124712680","areas":["Parit Buntar"]},{"name":"Nurul Azuwa","code":"MH05712","phone":"0133458990","areas":["Teluk Intan"]},{"name":"Zamiah","code":"MH057113","phone":"0125860139","areas":["Chemor","Chepor","Meru Ipoh"]},{"name":"Azaliza","code":"SA057110","phone":"0142509806","areas":["Ipoh","Tambun","Gopeng","Meru"]}],"Perlis":[{"name":"Nadhirah","code":null,"phone":"0164282092","areas":["Perlis"]}],"Sabah":[{"name":"Norah","code":"SP03001","phone":"0168313664","areas":["Kota Kinabalu"]},{"name":"Sarifah Ahmad","code":"SA03047","phone":"0146052845","areas":["Kepayan","Papar","Kota Kinabalu"]},{"name":"Hasnidah Muhiddin","code":"SA030111","phone":"0133716562","areas":["Kota Kinabalu"]},{"name":"Hariaty Binti Hapah","code":"SA03098","phone":"0128699827","areas":["Petagas","Putatan","Kota Kinabalu"]},{"name":"Heriyanty","code":"SD030191","phone":"0138985324","areas":["Tawau"]},{"name":"Dg Masliah","code":"SA030104","phone":"0178355723","areas":["Kimanis Papar","Membakut","Beaufort"]},{"name":"Norfaizah Karim","code":"SA03045","phone":null,"areas":["Felda Umas","Kalabakan","Merotai","Bandar Tawau"]},{"name":"Saunah Masir","code":"MH030306","phone":"0143565180","areas":["Papar","Beaufort","Tenom"]},{"name":"Mohd Adzri bin Jamian","code":"MH030226","phone":"0103347089","areas":["Kota Belud"]},{"name":"Siti Marziani binti Mohd Yassin","code":"MH030107","phone":"0198991558","areas":["Membakut","Bongawan","Kuala Penyu"]},{"name":"DK Roshazianah Hassan","code":"MH03004","phone":"0168456591","areas":["Papar","Benoni"]},{"name":"Lidia Masile","code":"SA03060","phone":"01165508283","areas":["Sandakan"]},{"name":"Serjani Karim","code":"MH030203","phone":"0166162501","areas":["Kota Marudu"]}],"Sarawak":[{"name":"Faizah","code":"SN03401","phone":"0128027585","areas":["Kuching"]},{"name":"Zaharah Sauffi","code":"SA034219","phone":"0137046473","areas":["Samarahan"]},{"name":"Syikin","code":"MH03494","phone":"0128960496","areas":["Kuching"]},{"name":"Siti Khadijah","code":"MH034883","phone":"01117809026","areas":["Miri"]},{"name":"Aishah","code":"SA034119","phone":"01136284303","areas":["Sarikei"]},{"name":"Nazurah","code":"SA034201","phone":"0198682446","areas":["Bintangor"]},{"name":"Sharmila Salleh","code":"SA034241","phone":"0138348944","areas":["Bekenu","Miri"]},{"name":"Nurmadiana bt. Mohamed","code":"MH034314","phone":null,"areas":["Kuching"]},{"name":"Rahmat Sedek","code":"MH003492","phone":null,"areas":["Sibu"]}],"WP Labuan":[{"name":"Roslineh binti Mastin","code":"SA03006","phone":"01125232576","areas":["Labuan"]},{"name":"Noorshima Tan","code":"SA030117","phone":"0168250846","areas":["Labuan"]},{"name":"Farmiza Suparjo","code":"MH030265","phone":"0133822621","areas":["Labuan"]},{"name":"Husmiah Odin","code":"MH030289","phone":"01131413582","areas":["Labuan"]}]}
+
+</script>
+
+<script>
+(function(){
+  const DATA = JSON.parse(document.getElementById('reseller-data').textContent);
+  const STATES = Object.keys(DATA);
+  const TOTAL = STATES.reduce((n,s)=>n+DATA[s].length,0);
+
+  document.getElementById('navStat').innerHTML =
+    '<b>' + TOTAL + '</b> ejen · <b>' + STATES.length + '</b> negeri';
+
+  // approximate centroids for nearest-state lookup
+  const CENTROIDS = {
+    "Kuala Lumpur":[3.1390,101.6869], "Selangor":[3.0738,101.5183], "Putrajaya":[2.9264,101.6964],
+    "Terengganu":[5.3117,103.1324], "Pahang":[3.8126,103.3256], "Kelantan":[6.1254,102.2381],
+    "Johor":[1.9758,103.4008], "Melaka":[2.1896,102.2501], "Negeri Sembilan":[2.7258,101.9424],
+    "Kedah":[6.1184,100.3685], "Pulau Pinang":[5.4141,100.3288], "Perak":[4.5921,101.0901],
+    "Perlis":[6.4449,100.2048], "Sabah":[5.9788,116.0753], "Sarawak":[2.5,113.0], "WP Labuan":[5.2831,115.2308]
+  };
+
+  let activeState = "Semua";
+  let query = "";
+
+  const SEAL = '<svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="5"/><path d="M34 51 L45 62 L68 38" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const ICON_WA = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.5 7.7 9.3 7.2c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.3c1.4.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.2-.4-4.5-1.3l-.3-.2-3 .8.8-2.9-.2-.3C4 15 3.5 13.5 3.5 12c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5-3.8 8.5-8.5 8.5z"/></svg>';
+  const ICON_CALL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.4 2.1L8.1 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.4c.9.3 1.8.5 2.7.6a2 2 0 011.9 2.2z"/></svg>';
+
+  function digitsOnly(p){ return (p||'').replace(/\D/g,''); }
+  function toIntl(p){
+    let d = digitsOnly(p);
+    if(!d) return null;
+    if(d.startsWith('0')) d = '60' + d.slice(1);
+    else if(!d.startsWith('60')) d = '60' + d;
+    return d;
+  }
+
+  function renderChips(){
+    const el = document.getElementById('chipsScroll');
+    let html = chipHTML('Semua', TOTAL, activeState==='Semua');
+    STATES.forEach(s=>{ html += chipHTML(s, DATA[s].length, activeState===s); });
+    el.innerHTML = html;
+    el.querySelectorAll('.chip').forEach(c=>{
+      c.addEventListener('click', ()=>{
+        activeState = c.dataset.state;
+        renderChips();
+        renderResults();
+      });
+    });
+  }
+  function chipHTML(label, count, active){
+    return '<button class="chip'+(active?' active':'')+'" data-state="'+escapeAttr(label)+'">'+
+      escapeHTML(label)+' <span class="count">('+count+')</span></button>';
+  }
+
+  function matches(agent, state){
+    if(query){
+      const q = query.toLowerCase();
+      const hay = (agent.name+' '+(agent.code||'')+' '+agent.areas.join(' ')+' '+state).toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    if(activeState!=='Semua' && state!==activeState) return false;
+    return true;
+  }
+
+  function cardHTML(agent, state){
+    const codeBlock = agent.code
+      ? '<div class="code-badge">'+SEAL+'<span>'+escapeHTML(agent.code)+'</span></div>'
+      : '<div class="code-badge muted">'+SEAL+'<span>Kod belum direkod</span></div>';
+
+    const areasHTML = agent.areas.map(a=>'<span class="area-tag">'+escapeHTML(a)+'</span>').join('');
+
+    const intl = toIntl(agent.phone);
+    let actions;
+    if(intl){
+      const waHref = 'https://wa.me/'+intl;
+      const telHref = 'tel:+'+intl;
+      actions = '<a class="card-btn btn-wa" href="'+waHref+'" target="_blank" rel="noopener">'+ICON_WA+' WhatsApp</a>'+
+                '<a class="card-btn btn-call" href="'+telHref+'">'+ICON_CALL+' Telefon</a>';
+    } else {
+      actions = '<div class="no-phone">Nombor telefon tiada — semak ejen lain berdekatan</div>';
+    }
+
+    return '<div class="card">'+
+      '<div class="card-top">'+codeBlock+'</div>'+
+      '<div class="card-name">'+escapeHTML(agent.name)+'</div>'+
+      '<div class="areas">'+areasHTML+'</div>'+
+      '<div class="card-actions">'+actions+'</div>'+
+    '</div>';
+  }
+
+  function renderResults(){
+    const el = document.getElementById('results');
+    const statesToShow = activeState==='Semua' ? STATES : [activeState];
+    let html = '';
+    let any = false;
+
+    statesToShow.forEach(state=>{
+      const list = DATA[state].filter(a=>matches(a,state));
+      if(list.length===0) return;
+      any = true;
+      html += '<div class="state-group">'+
+        '<div class="state-head"><h2>'+escapeHTML(state)+'</h2><span class="n">'+list.length+' ejen</span></div>'+
+        '<div class="grid">'+ list.map(a=>cardHTML(a,state)).join('') +'</div>'+
+      '</div>';
+    });
+
+    if(!any){
+      html = '<div class="empty">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>'+
+        '<p>Tiada ejen dijumpai untuk carian ini. Cuba kawasan, negeri atau ejaan lain.</p>'+
+        '<button class="reset-btn" id="resetBtn">Set semula carian</button>'+
+      '</div>';
+    }
+
+    el.innerHTML = html;
+    const rb = document.getElementById('resetBtn');
+    if(rb) rb.addEventListener('click', ()=>{
+      query = '';
+      activeState = 'Semua';
+      document.getElementById('searchInput').value = '';
+      renderChips();
+      renderResults();
+    });
+  }
+
+  function escapeHTML(s){
+    return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function escapeAttr(s){ return escapeHTML(s); }
+
+  // search
+  let debTimer;
+  document.getElementById('searchInput').addEventListener('input', (e)=>{
+    clearTimeout(debTimer);
+    const v = e.target.value;
+    debTimer = setTimeout(()=>{ query = v.trim(); renderResults(); }, 150);
+  });
+
+  // geolocation nearest state
+  function haversine(lat1,lon1,lat2,lon2){
+    const R=6371, toRad=d=>d*Math.PI/180;
+    const dLat=toRad(lat2-lat1), dLon=toRad(lon2-lon1);
+    const a=Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;
+    return 2*R*Math.asin(Math.sqrt(a));
+  }
+  function nearestState(lat, lon){
+    let best=null, bestD=Infinity;
+    Object.keys(CENTROIDS).forEach(s=>{
+      const [clat,clon] = CENTROIDS[s];
+      const d = haversine(lat,lon,clat,clon);
+      if(d<bestD){ bestD=d; best=s; }
+    });
+    return best;
+  }
+
+  const geoMsg = document.getElementById('geoMsg');
+  document.getElementById('geoBtn').addEventListener('click', ()=>{
+    if(!navigator.geolocation){
+      geoMsg.textContent = 'Pelayar anda tidak menyokong pengesanan lokasi. Sila pilih negeri secara manual di bawah.';
+      geoMsg.className = 'geo-msg show error';
+      return;
+    }
+    geoMsg.textContent = 'Mengesan lokasi anda…';
+    geoMsg.className = 'geo-msg show';
+    navigator.geolocation.getCurrentPosition(
+      (pos)=>{
+        const s = nearestState(pos.coords.latitude, pos.coords.longitude);
+        activeState = s;
+        query = '';
+        document.getElementById('searchInput').value = '';
+        renderChips();
+        renderResults();
+        geoMsg.textContent = 'Menunjukkan ejen anggaran berhampiran ' + s + '. Jika kurang tepat, pilih negeri lain di bawah.';
+        geoMsg.className = 'geo-msg show';
+        document.querySelector('.chips-section').scrollIntoView({behavior:'smooth', block:'start'});
+      },
+      ()=>{
+        geoMsg.textContent = 'Kebenaran lokasi tidak diberikan. Sila pilih negeri secara manual di bawah.';
+        geoMsg.className = 'geo-msg show error';
+      },
+      { timeout: 8000 }
+    );
+  });
+
+  renderChips();
+  renderResults();
+})();
+</script>
+
+</body>
+</html>
